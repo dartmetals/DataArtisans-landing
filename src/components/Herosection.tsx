@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 const Herosection: React.FC = () => {
   const [activeProject, setActiveProject] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const [mediaLoaded, setMediaLoaded] = useState(false);
 
   const projects = [
     {
@@ -57,13 +58,14 @@ const Herosection: React.FC = () => {
   description: 'Master in-demand tech skills through our industry-aligned IT training programs. From Data Science to Cloud Computing, we prepare you for top UK employers with hands-on projects, mock interviews, and direct placement support.'
 }
   ];
-
+  
   useEffect(() => {
     const interval = setInterval(() => {
       setIsTransitioning(true);
       setTimeout(() => {
         setActiveProject((prev) => (prev + 1) % projects.length);
         setIsTransitioning(false);
+        setMediaLoaded(false);
       }, 500);
     }, 5000);
 
@@ -75,6 +77,7 @@ const Herosection: React.FC = () => {
     setTimeout(() => {
       setActiveProject(index);
       setIsTransitioning(false);
+      setMediaLoaded(false);
     }, 500);
   };
 
@@ -101,28 +104,43 @@ const Herosection: React.FC = () => {
           }`}
         >
           {projects[activeProject].video ? (
-            <video 
-              key={activeProject}
-              autoPlay 
-              loop 
-              muted 
-              playsInline
-              className="w-full h-full object-cover"
-            >
-              <source src={projects[activeProject].video} type="video/mp4" />
-              {/* Fallback image if video doesn't load */}
+            <>
+              {!mediaLoaded && (
+                <div className="absolute inset-0 bg-gray-800 animate-pulse"></div>
+              )}
+              <video 
+                key={activeProject}
+                autoPlay 
+                loop 
+                muted 
+                playsInline
+                className="w-full h-full object-cover"
+                onLoadedData={() => setMediaLoaded(true)}
+                preload="metadata"
+              >
+                <source src={projects[activeProject].video} type="video/mp4" />
+                {/* Fallback image if video doesn't load */}
+                <img 
+                  src={projects[activeProject].image} 
+                  alt={projects[activeProject].title}
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                />
+              </video>
+            </>
+          ) : (
+            <>
+              {!mediaLoaded && (
+                <div className="absolute inset-0 bg-gray-800 animate-pulse"></div>
+              )}
               <img 
                 src={projects[activeProject].image} 
                 alt={projects[activeProject].title}
                 className="w-full h-full object-cover"
+                onLoad={() => setMediaLoaded(true)}
+                loading="lazy"
               />
-            </video>
-          ) : (
-            <img 
-              src={projects[activeProject].image} 
-              alt={projects[activeProject].title}
-              className="w-full h-full object-cover"
-            />
+            </>
           )}
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
         </div>
@@ -136,33 +154,15 @@ const Herosection: React.FC = () => {
               <span className="bg-blue-600 text-white px-2 py-1 rounded-full text-xs md:text-sm font-semibold">
                 {projects[activeProject].type}
               </span>
-              {/* <span className="bg-white text-gray-800 px-4 py-2 rounded-full text-sm font-semibold">
-                {projects[activeProject].year}
-              </span> */}
             </div>
 
             <h3 className="text-2xl md:text-4xl font-bold text-white mb-2">
               {projects[activeProject].title}
             </h3>
 
-            {/* <div className="flex items-center text-gray-300 mb-4">
-              <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-              </svg>
-              <span className="text-lg">{projects[activeProject].location}</span>
-            </div> */}
-
             <p className="text-gray-300 text-base mb-3 max-w-xl">
               {projects[activeProject].description}
             </p>
-
-            {/* <button className="bg-white text-gray-900 hover:bg-gray-100 font-bold py-2 px-4 rounded-lg transition-all duration-300 transform hover:scale-105 flex items-center">
-              View Project Details
-              <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-              </svg>
-            </button> */}
           </div>
         </div>
 
@@ -186,12 +186,14 @@ const Herosection: React.FC = () => {
                       className="w-full h-full object-cover"
                       muted
                       playsInline
+                      preload="metadata"
                     />
                   ) : (
                     <img 
                       src={project.image} 
                       alt={project.title}
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                      loading="lazy"
                     />
                   )}
                   <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all duration-300"></div>
@@ -201,14 +203,6 @@ const Herosection: React.FC = () => {
                   <h4 className="text-sm font-semibold text-white mb-1">{project.title}</h4>
                   <p className="text-xs text-gray-300">{project.type}</p>
                 </div>
-
-                {/* {index === 0 && (
-                  <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
-                    <div className="bg-green-500 text-white text-xs px-3 py-1 rounded-full animate-pulse shadow-lg whitespace-nowrap">
-                      Next Project
-                    </div>
-                  </div>
-                )} */}
               </div>
             ))}
           </div>
@@ -224,27 +218,42 @@ const Herosection: React.FC = () => {
             }`}
           >
             {projects[activeProject].video ? (
-              <video 
-                key={activeProject}
-                autoPlay 
-                loop 
-                muted 
-                playsInline
-                className="w-full h-full object-cover"
-              >
-                <source src={projects[activeProject].video} type="video/mp4" />
+              <>
+                {!mediaLoaded && (
+                  <div className="absolute inset-0 bg-gray-800 animate-pulse"></div>
+                )}
+                <video 
+                  key={activeProject}
+                  autoPlay 
+                  loop 
+                  muted 
+                  playsInline
+                  className="w-full h-full object-cover"
+                  onLoadedData={() => setMediaLoaded(true)}
+                  preload="metadata"
+                >
+                  <source src={projects[activeProject].video} type="video/mp4" />
+                  <img 
+                    src={projects[activeProject].image} 
+                    alt={projects[activeProject].title}
+                    className="w-full h-full object-cover"
+                    loading="lazy"
+                  />
+                </video>
+              </>
+            ) : (
+              <>
+                {!mediaLoaded && (
+                  <div className="absolute inset-0 bg-gray-800 animate-pulse"></div>
+                )}
                 <img 
                   src={projects[activeProject].image} 
                   alt={projects[activeProject].title}
                   className="w-full h-full object-cover"
+                  onLoad={() => setMediaLoaded(true)}
+                  loading="lazy"
                 />
-              </video>
-            ) : (
-              <img 
-                src={projects[activeProject].image} 
-                alt={projects[activeProject].title}
-                className="w-full h-full object-cover"
-              />
+              </>
             )}
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
           </div>
@@ -258,33 +267,15 @@ const Herosection: React.FC = () => {
                 <span className="bg-blue-600 text-white px-3 py-1 rounded-full text-xs font-semibold">
                   {projects[activeProject].type}
                 </span>
-                {/* <span className="bg-white text-gray-800 px-3 py-1 rounded-full text-xs font-semibold">
-                  {projects[activeProject].year}
-                </span> */}
               </div>
 
               <h3 className="text-xl font-bold text-white mb-">
                 {projects[activeProject].title}
               </h3>
 
-              {/* <div className="flex items-center text-gray-300 mb-2">
-                <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                </svg>
-                <span className="text-xs">{projects[activeProject].location}</span> */}
-              {/* </div> */}
-
               <p className="text-gray-300 text-xs mb-3">
                 {projects[activeProject].description}
               </p>
-
-              {/* <button className="w-full bg-white text-gray-900 hover:bg-gray-100 font-bold py-2 px-4 rounded-lg transition-all duration-300 flex items-center justify-center text-sm">
-                View Project Details
-                <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                </svg>
-              </button> */}
             </div>
 
             {/* Mobile Preview Images */}
@@ -303,29 +294,17 @@ const Herosection: React.FC = () => {
                           className="w-full h-full object-cover"
                           muted
                           playsInline
+                          preload="metadata"
                         />
                       ) : (
                         <img 
                           src={project.image} 
                           alt={project.title}
                           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                          loading="lazy"
                         />
                       )}
                     </div>
-                    
-                    {/* <div className="mt-1 text-center">
-                      <h5 className="text-[10px] font-semibold text-white line-clamp-1 px-1">
-                        {project.title}
-                      </h5>
-                    </div> */}
-
-                    {/* {index === 0 && (
-                      <div className="absolute -top-2 -right-2">
-                        <div className="bg-green-500 text-white text-[10px] px-1.5 py-0.5 rounded-full animate-pulse shadow-lg">
-                          Next
-                        </div>
-                      </div>
-                    )} */}
                   </div>
                 ))}
               </div>
