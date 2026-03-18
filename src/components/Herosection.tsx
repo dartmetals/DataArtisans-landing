@@ -156,18 +156,18 @@ const Herosection: React.FC = () => {
               </span>
             </div>
 
-            <h3 className="text-2xl md:text-4xl font-bold text-white mb-2">
+            <h3 className="text-2xl md:text-5xl font-bold text-white mb-2">
               {projects[activeProject].title}
             </h3>
 
-            <p className="text-gray-300 text-base mb-3 max-w-xl">
+            <p className="text-gray-300 text-lg mb-3 max-w-xl">
               {projects[activeProject].description}
             </p>
           </div>
         </div>
 
         {/* Desktop Preview Images - Positioned absolutely */}
-        <div className="absolute bottom-8 right-12">
+        <div className="absolute bottom-8 right-10">
           <div className="flex gap-6">
             {getPreviewProjects().map((project, index) => (
               <div 
@@ -179,7 +179,7 @@ const Herosection: React.FC = () => {
                 }`}
                 onClick={() => goToProject((activeProject + index + 1) % projects.length)}
               >
-                <div className="w-40 h-32 rounded-lg overflow-hidden shadow-lg border-2 border-white/20 group-hover:border-white/40 transition-all duration-300">
+                <div className="w-40 h-28 rounded-lg overflow-hidden shadow-lg border-2 border-white/20 group-hover:border-white/40 transition-all duration-300">
                   {project.video ? (
                     <video 
                       src={project.video}
@@ -209,105 +209,101 @@ const Herosection: React.FC = () => {
         </div>
       </div>
 
-      {/* Mobile Version - Full width */}
-      <div className="lg:hidden relative w-full h-screen">
-        <div className="relative w-full h-full">
-          <div 
-            className={`absolute inset-0 transition-all duration-700 ${
-              isTransitioning ? 'opacity-0 scale-110' : 'opacity-100 scale-100'
-            }`}
-          >
-            {projects[activeProject].video ? (
-              <>
-                {!mediaLoaded && (
-                  <div className="absolute inset-0 bg-gray-800 animate-pulse"></div>
-                )}
-                <video 
-                  key={activeProject}
-                  autoPlay 
-                  loop 
-                  muted 
-                  playsInline
-                  className="w-full h-full object-cover"
-                  onLoadedData={() => setMediaLoaded(true)}
-                  preload="metadata"
-                >
-                  <source src={projects[activeProject].video} type="video/mp4" />
+      {/* Mobile Version - Full width with object-contain and top alignment */}
+      <div className="lg:hidden relative w-full min-h-screen bg-gradient-to-br from-gray-900 to-blue-900">
+        {/* Main Image/Video Container - Top aligned */}
+        <div className="w-full pt-4 px-4">
+          <div className="relative w-full aspect-[4/3]">
+            <div 
+              className={`absolute inset-0 transition-all duration-700 ${
+                isTransitioning ? 'opacity-0 scale-110' : 'opacity-100 scale-100'
+              }`}
+            >
+              {projects[activeProject].video ? (
+                <>
+                  {!mediaLoaded && (
+                    <div className="absolute inset-0 animate-pulse"></div>
+                  )}
+                  <video 
+                    key={activeProject}
+                    autoPlay 
+                    loop 
+                    muted 
+                    playsInline
+                    className="w-full h-full object-contain"
+                    onLoadedData={() => setMediaLoaded(true)}
+                    preload="metadata"
+                  >
+                    <source src={projects[activeProject].video} type="video/mp4" />
+                  </video>
+                </>
+              ) : (
+                <>
+                  {!mediaLoaded && (
+                    <div className="absolute inset-0  animate-pulse"></div>
+                  )}
                   <img 
                     src={projects[activeProject].image} 
                     alt={projects[activeProject].title}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-contain"
+                    onLoad={() => setMediaLoaded(true)}
                     loading="lazy"
                   />
-                </video>
-              </>
-            ) : (
-              <>
-                {!mediaLoaded && (
-                  <div className="absolute inset-0 bg-gray-800 animate-pulse"></div>
-                )}
-                <img 
-                  src={projects[activeProject].image} 
-                  alt={projects[activeProject].title}
-                  className="w-full h-full object-cover"
-                  onLoad={() => setMediaLoaded(true)}
-                  loading="lazy"
-                />
-              </>
-            )}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
+                </>
+              )}
+            </div>
           </div>
+        </div>
 
-          {/* Mobile Content */}
-          <div className={`absolute bottom-0 left-0 right-0 p-6 transition-all duration-700 ${
+        {/* Mobile Content - Below the image */}
+        <div className="px-4 py-2">
+          <div className={`transition-all duration-700 ${
             isTransitioning ? 'opacity-0 translate-y-10' : 'opacity-100 translate-y-0'
           }`}>
-            <div className="mb-">
-              <div className="flex flex-wrap items-center gap-2 mb-">
-                <span className="bg-blue-600 text-white px-3 py-1 rounded-full text-xs font-semibold">
-                  {projects[activeProject].type}
-                </span>
-              </div>
-
-              <h3 className="text-xl font-bold text-white mb-">
-                {projects[activeProject].title}
-              </h3>
-
-              <p className="text-gray-300 text-xs mb-3">
-                {projects[activeProject].description}
-              </p>
+            <div className="flex flex-wrap items-center gap-2 mb-2">
+              <span className="bg-blue-600 text-white px-3 py-1 rounded-full text-xs font-semibold">
+                {projects[activeProject].type}
+              </span>
             </div>
 
-            {/* Mobile Preview Images */}
-            <div className="mt-4">
-              <div className="flex gap-2 justify-center items-center">
-                {getPreviewProjects().map((project, index) => (
-                  <div 
-                    key={project.id}
-                    className="flex-1 max-w-[100px] relative group cursor-pointer"
-                    onClick={() => goToProject((activeProject + index + 1) % projects.length)}
-                  >
-                    <div className="w-full aspect-[4/3] rounded-lg overflow-hidden shadow-lg border-2 border-white/20 group-hover:border-white/40 transition-all duration-300">
-                      {project.video ? (
-                        <video 
-                          src={project.video}
-                          className="w-full h-full object-cover"
-                          muted
-                          playsInline
-                          preload="metadata"
-                        />
-                      ) : (
-                        <img 
-                          src={project.image} 
-                          alt={project.title}
-                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                          loading="lazy"
-                        />
-                      )}
-                    </div>
+            <h3 className="text-xl font-bold text-white mb-1">
+              {projects[activeProject].title}
+            </h3>
+
+            <p className="text-gray-300 text-sm mb-4 leading-relaxed">
+              {projects[activeProject].description}
+            </p>
+          </div>
+
+          {/* Mobile Preview Images */}
+          <div className="mt-6">
+            <div className="flex gap-2 justify-center items-center">
+              {getPreviewProjects().map((project, index) => (
+                <div 
+                  key={project.id}
+                  className="flex-1 max-w-[100px] relative group cursor-pointer"
+                  onClick={() => goToProject((activeProject + index + 1) % projects.length)}
+                >
+                  <div className="w-full aspect-[5/3] rounded-lg overflow-hidden shadow-lg border-2 border-white/20 group-hover:border-white/40 transition-all duration-300">
+                    {project.video ? (
+                      <video 
+                        src={project.video}
+                        className="w-full h-full object-cover"
+                        muted
+                        playsInline
+                        preload="metadata"
+                      />
+                    ) : (
+                      <img 
+                        src={project.image} 
+                        alt={project.title}
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                        loading="lazy"
+                      />
+                    )}
                   </div>
-                ))}
-              </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
