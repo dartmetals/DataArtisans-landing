@@ -212,7 +212,7 @@ const Herosection: React.FC = () => {
       {/* Mobile Version - Full width with object-contain and top alignment */}
       <div className="lg:hidden relative w-full bg-gradient-to-br from-gray-900 to-blue-900 pb-4">
         {/* Main Image/Video Container - Top aligned */}
-        <div className="w-full pt-10 px-4">
+        <div className="w-full pt-12 px-">
           <div className="relative w-full aspect-[4/3]">
             <div 
               className={`absolute inset-0 transition-all duration-700 ${
