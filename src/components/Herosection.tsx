@@ -210,9 +210,9 @@ const Herosection: React.FC = () => {
       </div>
 
       {/* Mobile Version - Full width with object-contain and top alignment */}
-      <div className="lg:hidden relative w-full min-h-screen bg-gradient-to-br from-gray-900 to-blue-900">
+      <div className="lg:hidden relative w-full bg-gradient-to-br from-gray-900 to-blue-900 pb-4">
         {/* Main Image/Video Container - Top aligned */}
-        <div className="w-full pt-4 px-4">
+        <div className="w-full pt-10 px-4">
           <div className="relative w-full aspect-[4/3]">
             <div 
               className={`absolute inset-0 transition-all duration-700 ${
@@ -240,7 +240,7 @@ const Herosection: React.FC = () => {
               ) : (
                 <>
                   {!mediaLoaded && (
-                    <div className="absolute inset-0  animate-pulse"></div>
+                    <div className="absolute inset-0 animate-pulse"></div>
                   )}
                   <img 
                     src={projects[activeProject].image} 
@@ -270,13 +270,13 @@ const Herosection: React.FC = () => {
               {projects[activeProject].title}
             </h3>
 
-            <p className="text-gray-300 text-sm mb-4 leading-relaxed">
+            <p className="text-gray-300 text-sm mb-3 leading-relaxed">
               {projects[activeProject].description}
             </p>
           </div>
 
           {/* Mobile Preview Images */}
-          <div className="mt-6">
+          <div className="mt-4">
             <div className="flex gap-2 justify-center items-center">
               {getPreviewProjects().map((project, index) => (
                 <div 
