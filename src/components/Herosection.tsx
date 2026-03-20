@@ -24,7 +24,7 @@ const Herosection: React.FC = () => {
   type: 'Job Assistance',
   location: 'London, Manchester, Birmingham',
   year: '2024',
-  image: '/job-bg.png',
+  image: '/job-bg.jpg',
   description: "Bridge the gap between your masters degree and dream UK job with our specialized IT training programs. Designed with leading tech employers, we provide CV workshops, mock interviews, and 100% placement support until you land your ideal role."
     },
     {
@@ -34,7 +34,7 @@ const Herosection: React.FC = () => {
   type: 'Cultural Integration',
   location: 'Across UK',
   year: '2024',
-  image: '/graduate-bg.png',
+  image: '/graduate-bg.jpg',
   description: 'Immerse yourself in British culture while studying – from historic pub quizzes to vibrant city festivals. Work part-time (up to 20 hours/week) at cafes, retail stores, or on-campus, making friends and earning £10-15/hr while building your global network and independence.'
 },
     {
@@ -44,7 +44,7 @@ const Herosection: React.FC = () => {
   type: 'End-to-End Assistance',
   location: 'UK Wide',
   year: '2024',
-  image: '/visa-bg.png',
+  image: '/visa-bg.jpg',
   description: "Your UK dream starts here. We handle everything – from hassle-free student visas with 98% success rate to guaranteed accommodation and loan assistance. Your only job? Pack your bags."
 },
     {
@@ -54,7 +54,7 @@ const Herosection: React.FC = () => {
   type: 'Job-Ready Programs',
   location: 'Tech Hubs Across UK',
   year: '2024',
-  image: '/training-bg.png',
+  image: '/training-bg.jpg',
   description: 'Master in-demand tech skills through our industry-aligned IT training programs. From Data Science to Cloud Computing, we prepare you for top UK employers with hands-on projects, mock interviews, and direct placement support.'
 }
   ];
