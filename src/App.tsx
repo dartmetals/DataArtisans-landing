@@ -262,7 +262,7 @@ const App = () => {
       <img 
         src="/da-logo2.png" 
         alt="DA Logo" 
-        className="w-76 h-20 object-contain"
+        className="w-76 h-20 object-contain  cursor-pointer"
       />
       {/* Company Name */}
       {/* <span className="font-bold text-xl text-gray-800">DataArtisans</span> */}
@@ -270,10 +270,10 @@ const App = () => {
     
     {/* Desktop Menu */}
     <div className="hidden md:flex space-x-6">
-      <button onClick={() => scrollToSection('home')} className="text-gray-600 hover:text-blue-600">Home</button>
-      <button onClick={() => scrollToSection('about')} className="text-gray-600 hover:text-blue-600">Your Path</button>
-      <button onClick={() => scrollToSection('speakers')} className="text-gray-600 hover:text-blue-600">Insights</button>
-      <button onClick={() => scrollToSection('register')} className="text-gray-600 hover:text-blue-600">Register</button>
+      <button onClick={() => scrollToSection('home')} className="text-gray-600 hover:text-blue-600 cursor-pointer">Home</button>
+      <button onClick={() => scrollToSection('about')} className="text-gray-600 hover:text-blue-600 cursor-pointer">Your Path</button>
+      <button onClick={() => scrollToSection('speakers')} className="text-gray-600 hover:text-blue-600 cursor-pointer">Insights</button>
+      <button onClick={() => scrollToSection('register')} className="text-gray-600 hover:text-blue-600 cursor-pointer">Register</button>
     </div>
 
     {/* Mobile Menu Button */}
@@ -457,8 +457,8 @@ const App = () => {
                               {/* 🎯</span> */}
                           </div>
                           <div className="min-w-0 flex-1">
-                            <p className="font-bold text-xs text-gray-700">Availability</p>
-                            <p className="text-orange-600 font-semibold text-xs break-words">Limited Seats</p>
+                            <p className="font-bold text-xs text-gray-700 -ml-1">Availability</p>
+                            <p className="text-orange-600 font-semibold text-xs break-words -ml-1">Limited Seats</p>
                           </div>
                         </div>
 
@@ -520,7 +520,7 @@ const App = () => {
                     value={formData.firstName}
                     onChange={handleRegisterChange}
                     required
-                    className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-colors placeholder:text-sm"
+                    className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-colors placeholder:text-sm cursor-pointer"
                     placeholder="Enter your First Name"
                   />
                 </div>
@@ -534,7 +534,7 @@ const App = () => {
                     name="lastName"
                     value={formData.lastName}
                     onChange={handleRegisterChange}
-                    className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-colors placeholder:text-sm"
+                    className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-colors placeholder:text-sm cursor-pointer"
                     placeholder="Enter your Last Name"
                   />
                 </div>
@@ -552,7 +552,7 @@ const App = () => {
                   value={formData.email}
                   onChange={handleRegisterChange}
                   required
-                  className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-colors placeholder:text-sm"
+                  className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-colors placeholder:text-sm cursor-pointer"
                   placeholder="Enter Your Email Address"
                 />
               </div>
@@ -568,7 +568,7 @@ const App = () => {
                   value={formData.location}
                   onChange={handleRegisterChange}
                   required
-                  className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-colors placeholder:text-sm"
+                  className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-colors placeholder:text-sm cursor-pointer"
                   placeholder="e.g., Mumbai, India"
                 />
               </div>
@@ -685,7 +685,7 @@ const App = () => {
                   value={formData.status}
                   onChange={handleRegisterChange}
                   required
-                  className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-colors bg-white"
+                  className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-colors bg-white cursor-pointer"
                 >
                   {statusOptions.map((option) => (
                     <option key={option.value} value={option.value}>
@@ -720,9 +720,9 @@ const App = () => {
                   name="agreeTerms"
                   checked={formData.agreeTerms}
                   onChange={handleRegisterChange}
-                  className="mt-1"
+                  className="mt-1 cursor-pointer"
                 />
-                <label htmlFor="agreeTerms" className="text-sm text-gray-600">
+                <label htmlFor="agreeTerms" className="text-sm text-gray-600 cursor-pointer">
                   I agree to the terms and conditions and acknowledge that my data will be processed in accordance with the privacy policy.
                 </label>
               </div>
@@ -730,7 +730,7 @@ const App = () => {
               {/* Submit Button */}
               <button
                 type="submit"
-                className="w-full text-lg font-semibold py-3 px-6 rounded-4xl border border-2 border-purple-800 md:border-[#FF0000] bg-white text-black hover:bg-purple-800 active:bg-purple-800 active:text-white active:-translate-y-1 active:scale-105 md:hover:bg-[#FF0000] hover:text-white transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-xl">
+                className="w-full text-lg font-semibold py-3 px-6 rounded-4xl border border-2 border-purple-800 md:border-[#FF0000] bg-white text-black hover:bg-purple-800 active:bg-purple-800 active:text-white active:-translate-y-1 active:scale-105 md:hover:bg-[#FF0000] hover:text-white transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-xl cursor-pointer">
                 Submit Query
               </button>
             </form>
@@ -875,7 +875,7 @@ const App = () => {
         <img 
           src="/da-logo.png" 
           alt="DataArtisans Logo" 
-          className="w-40 md:w-48 h-auto object-contain md:ml-16"
+          className="w-40 md:w-48 h-auto object-contain md:ml-"
         />
         {/* <div className="w-20 h-1 bg-[#fdba02] rounded-full"></div> */}
       </div>
