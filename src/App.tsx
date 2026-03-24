@@ -892,8 +892,7 @@ import 'react-phone-input-2/lib/style.css';
 import { BsWhatsapp } from 'react-icons/bs';
 
 interface FormData {
-  firstName: string;
-  lastName: string;
+  fullName: string;
   email: string;
   phone: string;
   countryCode: string;
@@ -907,8 +906,7 @@ interface FormData {
 
 const App = () => {
   const [formData, setFormData] = useState<FormData>({
-    firstName: '',
-    lastName: '',
+    fullName: '',
     email: '',
     phone: '',
     countryCode: '',
@@ -960,8 +958,7 @@ const App = () => {
   }
 
   const payload = {
-    firstName: formData.firstName,
-    lastName: formData.lastName,
+    fullName: formData.fullName,
     email: formData.email,
     phoneNumber: formattedPhoneNumber,
     countryCode: formData.countryCode,
@@ -992,8 +989,7 @@ const App = () => {
     );
 
     setFormData({
-      firstName: '',
-      lastName: '',
+      fullName: '',
       email: '',
       phone: '',
       countryCode: '',
@@ -1184,19 +1180,19 @@ const App = () => {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-1">
-                        First Name <span className='text-red-600'>*</span>
+                        Full Name <span className='text-red-600'>*</span>
                       </label>
                       <input
                         type="text"
-                        name="firstName"
-                        value={formData.firstName}
+                        name="fullName"
+                        value={formData.fullName}
                         onChange={handleRegisterChange}
                         required
                         className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-colors"
-                        placeholder="Enter your First Name"
+                        placeholder="Enter your Full Name"
                       />
                     </div>
-                    <div>
+                    {/* <div>
                       <label className="block text-sm font-medium text-gray-700 mb-1">
                         Last Name
                       </label>
@@ -1208,11 +1204,10 @@ const App = () => {
                         className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-colors"
                         placeholder="Enter your Last Name"
                       />
-                    </div>
-                  </div>
+                    </div> */}
+                  {/* </div> */}
 
                   {/* Email Address */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">
                       Email Address <span className='text-red-600'>*</span>
@@ -1227,8 +1222,10 @@ const App = () => {
                       placeholder="Enter your Email Address"
                     />
                   </div>
+                  </div>
 
                   {/* Phone Number */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">
                       Phone Number <span className='text-red-600'>*</span>
@@ -1263,10 +1260,25 @@ const App = () => {
                       />
                     </div>
                   </div>
+
+                  {/* University Name */}
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      University / College Name 
+                    </label>
+                    <input
+                      type="text"
+                      name="university"
+                      value={formData.university}
+                      onChange={handleRegisterChange}
+                      className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-colors"
+                      placeholder="Enter your University/College name"
+                    />
+                  </div>
                   </div>
 
                   {/* Year of Passing (Text Input) and Location */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-2 md:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-1">
                         Year of Passing <span className='text-red-600'>*</span>
@@ -1294,21 +1306,6 @@ const App = () => {
                         placeholder="e.g., Mumbai, India"
                       />
                     </div>
-                  </div>
-
-                  {/* University Name */}
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
-                      University / College Name 
-                    </label>
-                    <input
-                      type="text"
-                      name="university"
-                      value={formData.university}
-                      onChange={handleRegisterChange}
-                      className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-colors"
-                      placeholder="Enter your University/College name"
-                    />
                   </div>
 
                   {/* Career Stage */}
