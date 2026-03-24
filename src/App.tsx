@@ -1136,7 +1136,7 @@ const App = () => {
 
         {/* Content Container */}
         <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 py-5">
-          <div className="flex flex-col lg:flex-row gap-12 items-center mt-20">
+          <div className="flex flex-col lg:flex-row gap-12 items-center mt-24 md:mt-20 ">
             
             {/* Left Side - Content */}
             <div className="lg:w-1/2 text-white">
