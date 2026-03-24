@@ -973,7 +973,7 @@ const App = () => {
 
   try {
     await fetch(
-      "https://script.google.com/macros/s/AKfycbwuDtKBUquqfUxq8cXCUxcP_qxi4UFrCaZY_uoHg-Aw3gKzL3Uks-JexdLIg5zKyx9Xhg/exec",
+      "https://script.google.com/macros/s/AKfycbyxKASOXFHhZHY-UNXOlfmTUackJBtLL_HK__JQcxJwTfguSbvrLFjHSr2SE9ekhU1h4Q/exec",
       {
         method: "POST",
         mode: "no-cors",
